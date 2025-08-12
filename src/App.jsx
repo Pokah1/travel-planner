@@ -1,9 +1,11 @@
+import Navigation from "./components/NavBar";
 import Home from "./pages/Home";
 
 function App() {
   return (
     <>
-    <Home />
+   <Navigation />
+   <h2>Hello World</h2>
   
     </>
   );
