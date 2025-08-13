@@ -89,7 +89,7 @@ const HomePage = () => {
           </div>
           <Link to="/destinations">
           <button
-  class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium
+  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium
          border border-input bg-transparent hover:bg-accent hover:text-accent-foreground
          h-11 px-8 border-white/30 text-white hover:bg-white/10 transition-colors focus-visible:outline-none
          focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
