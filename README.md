@@ -27,16 +27,13 @@ It allows users to explore destinations, create itineraries, and manage planned 
 | **JavaScript**    | Simpler code for learning (No TypeScript) |
 
 ---
+## Authentication and Database
+### Firebase Auth and Firestore
 
 ## 🌐 APIs Used
 
-### **1. GeoDB Cities API** (via [RapidAPI](https://rapidapi.com/wirefreethought/api/geodb-cities/))
+### **1. GeoDB Cities API** https://developers.amadeus.com/
 - **Purpose:** Search and get destination city details.
-- **Free Tier:** 10,000 requests/month.
-
-### **2. Tripadvisor API** (via [RapidAPI](https://rapidapi.com/apidojo/api/travel-advisor/))
-- **Purpose:** Get local attractions, hotels, and restaurants.
-- **Free Tier:** Limited requests per month.
 
 ---
 

@@ -1,13 +1,17 @@
+import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/NavBar";
-import Home from "./pages/Home";
+import HomePage from "./pages/Home";
 
 function App() {
   return (
-    <>
-   <Navigation />
-   <h2>Hello World</h2>
-  
-    </>
+    <div className="min-h-screen flex flex-col w-full">
+      <Navigation />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
