@@ -102,7 +102,7 @@ const HomePage = () => {
     </section>
     
 
-    Features Section
+  {/* Features Sections  */}
 <section className="py-20 px-4">
   <div className="container mx-auto">
     <div className="text-center mb-16">
@@ -135,7 +135,7 @@ const HomePage = () => {
 </section>
 
 
-Featured Destinations
+{/* Featured Destinations */}
       <section className="py-20 px-4 bg-[#f1f5f9]/30">
         <div className="container mx-auto">
           <div className="flex justify-between items-center mb-12">
