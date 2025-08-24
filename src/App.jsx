@@ -3,6 +3,12 @@ import Navigation from "./components/NavBar";
 import HomePage from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import HotelSearch from "./pages/HotelSearch";
+import Destinations from "./pages/Destinations";
+import MyItineraries from "./pages/MyItineraries";
+import TravelPlanner from "./pages/Planner";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -13,6 +19,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/hotels" element={<HotelSearch />} />
+          <Route path="/destinations" element={<Destinations />} />
+          <Route path="/itineraries" element={<MyItineraries />} />
+          <Route path="/planner" element={<TravelPlanner />} />
+          <Route path="/404" element={<NotFound />} />
         </Routes>
       </main>
     </div>

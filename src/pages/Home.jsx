@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Search, MapPin, Calendar, Users } from "lucide-react";
 import heroImage  from "../assets/heroImage.jpg"
-import DestinationCard from "../components/HomePageCard";
+import DestinationCard from "../components/DestinationCard";
 import mountainImage from "../assets/mountain-lake.jpg";
 import cityImage from "../assets/europeancity.jpg";
 import templeImage from "../assets/japanese-temple.jpg";

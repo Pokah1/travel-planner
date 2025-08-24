@@ -22,7 +22,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email.trim(), password);
       setLoading(false);
-      navigate("/"); // redirect
+      navigate("/dashboard"); // redirect
     } catch (err) {
       setLoading(false);
       setError(err.message);
@@ -37,7 +37,7 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
       setLoading(false);
-      navigate("/"); // redirect
+      navigate("/dashboard"); // redirect
     } catch (err) {
       setLoading(false);
       setError(err.message);

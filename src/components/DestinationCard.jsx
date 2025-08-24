@@ -1,14 +1,7 @@
-import { MapPin, Star } from "lucide-react";
 
-const DestinationCard = ({
-  name,
-  country,
-  image,
-  rating,
-  price,
-  tags,
-  onClick,
-}) => {
+import { MapPin, Star } from "lucide-react"
+
+const DestinationCard = ({ name, country, image, rating, price, tags, onClick }) => {
   return (
     <div
       className="group cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1 rounded-lg bg-white"
@@ -20,14 +13,12 @@ const DestinationCard = ({
       {/* Image section */}
       <div className="relative h-48 overflow-hidden">
         <img
-          src={image}
+          src={image || "/placeholder.svg"}
           alt={name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute top-3 right-3">
-          <span className="inline-block bg-white/90 text-[#020617] text-sm font-medium px-2 py-1 rounded">
-            {price}
-          </span>
+          <span className="inline-block bg-white/90 text-[#020617] text-sm font-medium px-2 py-1 rounded">{price}</span>
         </div>
       </div>
 
@@ -40,9 +31,7 @@ const DestinationCard = ({
         </div>
 
         {/* Title */}
-        <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
-          {name}
-        </h3>
+        <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{name}</h3>
 
         {/* Rating */}
         <div className="flex items-center space-x-1 mb-3">
@@ -53,18 +42,15 @@ const DestinationCard = ({
 
         {/* Tags */}
         <div className="flex flex-wrap gap-1">
-          {tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="inline-block border border-gray-300 rounded px-2 py-0.5 text-xs"
-            >
+          {(tags || []).slice(0, 3).map((tag) => (
+            <span key={tag} className="inline-block border border-gray-300 rounded px-2 py-0.5 text-xs">
               {tag}
             </span>
           ))}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DestinationCard;
+export default DestinationCard
