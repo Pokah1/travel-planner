@@ -3,29 +3,59 @@ import { auth, db } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { MapPin, Calendar, Heart, TrendingUp, Globe } from "lucide-react";
-import { logout } from "../utils/logout";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-const [displayName, setDisplayName] = useState("");
-const navigate = useNavigate();
-
+  const [displayName, setDisplayName] = useState("");
 
   const stats = [
-    { label: "Trips Planned", value: "12", icon: MapPin, color: "text-blue-600" },
-    { label: "Countries Visited", value: "8", icon: Globe, color: "text-green-600" },
-    { label: "Saved Destinations", value: "24", icon: Heart, color: "text-red-600" },
-    { label: "Days Traveled", value: "156", icon: Calendar, color: "text-purple-600" }
+    {
+      label: "Trips Planned",
+      value: "12",
+      icon: MapPin,
+      color: "text-blue-600",
+    },
+    {
+      label: "Countries Visited",
+      value: "8",
+      icon: Globe,
+      color: "text-green-600",
+    },
+    {
+      label: "Saved Destinations",
+      value: "24",
+      icon: Heart,
+      color: "text-red-600",
+    },
+    {
+      label: "Days Traveled",
+      value: "156",
+      icon: Calendar,
+      color: "text-purple-600",
+    },
   ];
 
   const recentTrips = [
-    { destination: "Tokyo, Japan", date: "Dec 2024", status: "Completed", image: "/src/assets/japanese-temple.jpg" },
-    { destination: "Paris, France", date: "Jan 2025", status: "Upcoming", image: "/src/assets/european-city.jpg" },
-    { destination: "Bali, Indonesia", date: "Mar 2025", status: "Planning", image: "/src/assets/mountain-lake.jpg" }
+    {
+      destination: "Tokyo, Japan",
+      date: "Dec 2024",
+      status: "Completed",
+      image: "/src/assets/japanese-temple.jpg",
+    },
+    {
+      destination: "Paris, France",
+      date: "Jan 2025",
+      status: "Upcoming",
+      image: "/src/assets/europeancity.jpg",
+    },
+    {
+      destination: "Bali, Indonesia",
+      date: "Mar 2025",
+      status: "Planning",
+      image: "/src/assets/mountain-lake.jpg",
+    },
   ];
 
-
-useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
@@ -35,9 +65,7 @@ useEffect(() => {
           if (userSnap.exists()) {
             const { firstName, lastName, email } = userSnap.data();
             setDisplayName(
-              firstName && lastName
-                ? `${firstName} ${lastName}`
-                : email
+              firstName && lastName ? `${firstName} ${lastName}` : email
             );
           } else {
             setDisplayName(user.email);
@@ -52,25 +80,21 @@ useEffect(() => {
     return () => unsubscribe();
   }, []);
 
-
   return (
     <main className="container mx-auto px-4 py-8">
       {/* Welcome */}
       <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Welcome, {displayName || "Guest"}!</h1>
+        <h1 className="text-3xl font-bold mb-2">
+          Welcome, {displayName || "Guest"}!
+        </h1>
         <p className="text-gray-500">Ready for your next adventure?</p>
-
-          <button
-    onClick={() => logout(navigate)}
-    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
-  >
-    Logout
-  </button>
       </header>
 
       {/* Stats */}
       <section aria-labelledby="travel-stats" className="mb-8">
-        <h2 id="travel-stats" className="sr-only">Travel Statistics</h2>
+        <h2 id="travel-stats" className="sr-only">
+          Travel Statistics
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -94,11 +118,16 @@ useEffect(() => {
         <article className="bg-white shadow rounded-lg">
           <header className="border-b p-4">
             <h2 className="text-lg font-semibold">Recent Trips</h2>
-            <p className="text-sm text-gray-500">Your latest travel adventures</p>
+            <p className="text-sm text-gray-500">
+              Your latest travel adventures
+            </p>
           </header>
           <div className="p-4 space-y-4">
             {recentTrips.map((trip, index) => (
-              <div key={index} className="flex items-center space-x-4 p-4 rounded-lg border">
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-4 rounded-lg border"
+              >
                 <img
                   src={trip.image}
                   alt={trip.destination}
@@ -131,7 +160,9 @@ useEffect(() => {
         <aside className="bg-white shadow rounded-lg">
           <header className="border-b p-4">
             <h2 className="text-lg font-semibold">Quick Actions</h2>
-            <p className="text-sm text-gray-500">What would you like to do today?</p>
+            <p className="text-sm text-gray-500">
+              What would you like to do today?
+            </p>
           </header>
           <nav className="p-4 space-y-4">
             <button className="w-full flex items-center px-4 py-2 border rounded-lg hover:bg-gray-50">
@@ -169,7 +200,10 @@ useEffect(() => {
               <span>5 / 10</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: "50%" }}></div>
+              <div
+                className="bg-blue-500 h-2 rounded-full"
+                style={{ width: "50%" }}
+              ></div>
             </div>
           </div>
           <div>
@@ -178,7 +212,10 @@ useEffect(() => {
               <span>3 / 8</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-green-500 h-2 rounded-full" style={{ width: "37.5%" }}></div>
+              <div
+                className="bg-green-500 h-2 rounded-full"
+                style={{ width: "37.5%" }}
+              ></div>
             </div>
           </div>
           <div>
@@ -187,7 +224,10 @@ useEffect(() => {
               <span>7 / 12</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-purple-500 h-2 rounded-full" style={{ width: "58%" }}></div>
+              <div
+                className="bg-purple-500 h-2 rounded-full"
+                style={{ width: "58%" }}
+              ></div>
             </div>
           </div>
         </div>

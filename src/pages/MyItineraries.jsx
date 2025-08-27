@@ -78,7 +78,7 @@ const MyItineraries = () => {
                 Manage your planned and completed trips
               </p>
             </div>
-            <button className="px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
+            <button className="px-6 py-2 rounded-lg bg-[#03547c] text-white font-medium hover:bg-[#03548d] transition">
               Create New Trip
             </button>
           </header>
@@ -86,7 +86,7 @@ const MyItineraries = () => {
           {/* Stats */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white rounded-xl shadow p-6 text-center">
-              <p className="text-3xl font-bold text-blue-600">3</p>
+              <p className="text-3xl font-bold text-[#03547c]">3</p>
               <p className="text-gray-500">Total Trips</p>
             </div>
             <div className="bg-white rounded-xl shadow p-6 text-center">
@@ -106,7 +106,7 @@ const MyItineraries = () => {
                 key={filter}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
                   filter === "All"
-                    ? "bg-blue-600 text-white border-blue-600"
+                    ? "bg-[#03547c] text-white border-[#03547c]"
                     : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                 }`}
               >
@@ -140,7 +140,7 @@ const MyItineraries = () => {
 
                 {/* Content */}
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold group-hover:text-blue-600 transition">
+                  <h3 className="text-lg font-semibold group-hover:text-[#03547c] transition">
                     {itinerary.title}
                   </h3>
                   <div className="flex items-center gap-1 text-sm text-gray-500 mt-1">
@@ -194,7 +194,7 @@ const MyItineraries = () => {
                 Start planning your first trip to create amazing memories and
                 organize your travels
               </p>
-              <button className="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
+              <button className="px-6 py-3 rounded-lg bg-[#03547c] text-white font-medium hover:bg-[#03549e]transition">
                 Create Your First Trip
               </button>
             </div>

@@ -170,7 +170,7 @@ const TravelPlanner = () => {
           </div>
           <button
             onClick={addItineraryItem}
-            className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            className="mt-4 w-full bg-[#03547c] text-white py-2 rounded hover:[#03549e]"
           >
             Add to Itinerary
           </button>

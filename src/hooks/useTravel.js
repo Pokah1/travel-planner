@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useCallback } from "react"
 import { searchDestinations, searchFlights, searchHotelsByCity } from "../services/amadeus"
 import { formatFlightData, formatDestinationData } from "../utils/travel"
