@@ -10,6 +10,7 @@ import DestinationDetails from "./pages/DestinationDetails";
 import MyItineraries from "./pages/MyItineraries";
 import TravelPlanner from "./pages/Planner";
 import NotFound from "./pages/NotFound";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
           {/* Wrap all protected pages once */}

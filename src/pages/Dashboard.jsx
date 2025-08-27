@@ -6,6 +6,7 @@ import { MapPin, Calendar, Heart, TrendingUp, Globe } from "lucide-react";
 
 const Dashboard = () => {
   const [displayName, setDisplayName] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
 
   const stats = [
     {
@@ -58,6 +59,10 @@ const Dashboard = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
+
+// Set Google photoURL if exists
+      setProfileImage(user.photoURL || null);
+
         try {
           const userRef = doc(db, "users", user.uid);
           const userSnap = await getDoc(userRef);
@@ -81,14 +86,26 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <main className="container mx-auto px-4 py-8">
+    <main className="container mx-auto px-4 py-8 bg-gray-50 min-h-screen">
+
       {/* Welcome */}
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          Welcome, {displayName || "Guest"}!
-        </h1>
-        <p className="text-gray-500">Ready for your next adventure?</p>
-      </header>
+      <header className="mb-8 flex items-center space-x-4">
+  {profileImage && (
+    <img
+      src={profileImage}
+      alt={displayName}
+      className="w-15 h-15 rounded-full object-cover border-2 border-[#03547c]"
+    />
+  )}
+  <div>
+    <h1 className="text-3xl font-bold text-gray-800 mb-2">
+      Welcome, {displayName || "Guest"}!
+    </h1>
+    <p className="text-gray-600">Ready for your next adventure?</p>
+  </div>
+</header>
+
+
 
       {/* Stats */}
       <section aria-labelledby="travel-stats" className="mb-8">
@@ -99,7 +116,7 @@ const Dashboard = () => {
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <article key={index} className="bg-white shadow rounded-lg p-6">
+              <article key={index} className="bg-gray-100 shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-gray-500">{stat.label}</p>
@@ -150,9 +167,10 @@ const Dashboard = () => {
                 </span>
               </div>
             ))}
-            <button className="w-full mt-4 px-4 py-2 border rounded-lg hover:bg-gray-50">
-              View All Trips
-            </button>
+            <button className="w-full mt-4 px-4 py-2 bg-[#03547c] text-white rounded-lg hover:bg-[#03549d] transition-colors">
+  View All Trips
+</button>
+
           </div>
         </article>
 
@@ -187,8 +205,8 @@ const Dashboard = () => {
 
       {/* Travel Goals */}
       <section className="bg-white shadow rounded-lg mt-8">
-        <header className="border-b p-4">
-          <h2 className="text-lg font-semibold">2025 Travel Goals</h2>
+        <header className="border-b border-gray-200 p-4 mb-2">
+          <h2 className="text-lg font-semibold text-gray-700">2025 Travel Goals</h2>
           <p className="text-sm text-gray-500">
             Track your progress towards your travel objectives
           </p>
