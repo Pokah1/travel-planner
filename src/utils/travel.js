@@ -125,7 +125,7 @@ export const DEFAULT_SEARCH_PARAMS = {
 export const DESTINATIONS_DATA = [
   {
     id: 1,
-    name: "Swiss Alps",
+    name: "Swiss",
     country: "Switzerland",
     category: "Adventure",
     description: "Breathtaking mountain peaks and pristine alpine lakes.",
@@ -133,7 +133,7 @@ export const DESTINATIONS_DATA = [
     price: "$299",
   },
   {
-    id: 3,
+    id: 2,
     name: "Kyoto",
     country: "Japan",
     category: "Culture",
@@ -142,7 +142,7 @@ export const DESTINATIONS_DATA = [
     price: "$349",
   },
   {
-    id: 4,
+    id: 3,
     name: "Santorini",
     country: "Greece",
     category: "Beach",
@@ -151,7 +151,7 @@ export const DESTINATIONS_DATA = [
     price: "$279",
   },
   {
-    id: 5,
+    id: 4,
     name: "New York City",
     country: "USA",
     category: "City",
@@ -160,13 +160,49 @@ export const DESTINATIONS_DATA = [
     price: "$399",
   },
   {
-    id: 6,
+    id: 5,
     name: "Bali",
     country: "Indonesia",
-    category: "Beach",
+    category: "Culture",
     description: "Tropical paradise with beautiful beaches and culture.",
     rating: 4.8,
     price: "$229",
+  },
+  {
+    id: 6,
+    name: "Dubai",
+    country: "United Arab Emirates",
+    category: "City",
+    description: "Luxury shopping, modern architecture, and vibrant nightlife.",
+    rating: 4.7,
+    price: "$310",
+  },
+  {
+    id: 7,
+    name: "Qatar",
+    country: "Qatar",
+    category: "City ",
+    description: "Blend of modern architecture and traditional markets.",
+    rating: 4.5,
+    price: "$280",
+  },
+  {
+    id: 8,
+    name: "Maldives",
+    country: "Maldives",
+    category: "Beach",
+    description: "Crystal-clear waters, white sandy beaches, and luxury resorts.",
+    rating: 4.9,
+    price: "$450",
+  },
+   {
+    id: 9,
+    name: "Singapore",
+    country: "Singapore",
+    category: "City",
+    description: "Modern skyline, lush gardens, and vibrant multicultural scene.",
+    rating: 4.6,
+    price: "$330",
   },
 ]
 

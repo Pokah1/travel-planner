@@ -4,13 +4,14 @@ import Navigation from "./components/NavBar";
 import HomePage from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import HotelSearch from "./pages/HotelSearch";
+// import HotelSearch from "./pages/HotelSearch";
 import Destinations from "./pages/Destinations";
 import DestinationDetails from "./pages/DestinationDetails";
 import MyItineraries from "./pages/MyItineraries";
 import TravelPlanner from "./pages/Planner";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
+import HotelDetails from "./pages/HotelDetails";
 
 function App() {
   return (
@@ -25,9 +26,10 @@ function App() {
           {/* Wrap all protected pages once */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/hotels" element={<HotelSearch />} />
+            {/* <Route path="/hotels" element={<HotelSearch />} /> */}
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/destinations/:cityCode/:cityName" element={<DestinationDetails />} />
+            <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/itineraries" element={<MyItineraries />} />
             <Route path="/planner" element={<TravelPlanner />} />
           </Route>

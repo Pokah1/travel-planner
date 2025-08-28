@@ -7,11 +7,18 @@ import { DESTINATIONS_DATA, DESTINATION_CATEGORIES } from "../utils/travel";
 
 // Images
 import mountainImage from "../assets/mountain-lake.jpg";
-import cityImage from "../assets/europeancity.jpg";
+import cityImage from "../assets/new-york.jpg";
 import templeImage from "../assets/japanese-temple.jpg";
-import heroImage from "../assets/heroImage.jpg";
+import baliImage from "../assets/bali.jpg";
 import pragueImage from "../assets/prague-castle.png";
 import santoriniImage from "../assets/santorini-white.png";
+import dubaiImage from "../assets/dubai.jpg";
+import maldivesImage from "../assets/maldives.jpg";
+import qatarImage from "../assets/qatar.jpg";
+import singaporeImage from "../assets/singapore.jpg";
+
+
+
 
 const Destinations = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,7 +31,7 @@ const Destinations = () => {
   // Map hardcoded destinations to images
   const destinations = DESTINATIONS_DATA.map((destination) => {
     switch (destination.name) {
-      case "Swiss Alps":
+      case "Swiss":
         return { ...destination, image: mountainImage };
       case "Prague":
         return { ...destination, image: pragueImage };
@@ -35,7 +42,15 @@ const Destinations = () => {
       case "New York City":
         return { ...destination, image: cityImage };
       case "Bali":
-        return { ...destination, image: heroImage };
+        return { ...destination, image: baliImage };
+      case "Dubai":
+        return { ...destination, image: dubaiImage };
+      case "Qatar":
+        return { ...destination, image: qatarImage };
+      case "Maldives":
+        return { ...destination, image: maldivesImage };
+      case "Singapore":
+        return { ...destination, image: singaporeImage };
       default:
         return destination;
     }
@@ -156,13 +171,27 @@ const Destinations = () => {
                     <div
                       key={index}
                       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                      onClick={() =>
+                        navigate(
+                          `/destinations/${hotel.cityCode}/${encodeURIComponent(
+                            hotel.address?.cityName || searchQuery
+                          )}`,
+                          {
+                            state: {
+                              cityName: hotel.address?.cityName || searchQuery,
+                              lat: hotel.geoCode?.latitude,
+                              lon: hotel.geoCode?.longitude,
+                            },
+                          }
+                        )
+                      }
                     >
                       <div className="h-48 overflow-hidden">
-                        <img src={santoriniImage} 
-                        alt={hotel.name} 
-                        className="w-full h-full object-cover"
+                        <img
+                          src={santoriniImage}
+                          alt={hotel.name}
+                          className="w-full h-full object-cover"
                         />
-                      
                       </div>
                       <div className="p-4">
                         <h3 className="font-semibold text-lg mb-2">
@@ -188,14 +217,15 @@ const Destinations = () => {
                             ({hotel.rating || "N/A"})
                           </span>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-lg font-bold text-[#03547c]">
-                            {hotel.price}
-                          </span>
-                          <span className="text-sm text-gray-500">
-                            per night
-                          </span>
-                        </div>
+                        {/* Price Fix */}
+    {hotel.price && (
+      <div className="flex justify-between items-center">
+        <span className="text-lg font-bold text-[#03547c]">
+          {hotel.price} 
+        </span>
+        <span className="text-sm text-gray-500">per night</span>
+      </div>
+    )}
                       </div>
                     </div>
                   ))}
@@ -232,7 +262,11 @@ const Destinations = () => {
                     <DestinationCard
                       key={destinationId}
                       name={destination.name}
-                      country={destination.address?.countryName || destination.country || "Unknown"}
+                      country={
+                        destination.address?.countryName ||
+                        destination.country ||
+                        "Unknown"
+                      }
                       description={destination.description}
                       image={destination.image || "/assets/europeancity.jpg"}
                       rating={destination.rating || 4.5}
