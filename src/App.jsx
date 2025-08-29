@@ -12,6 +12,7 @@ import TravelPlanner from "./pages/Planner";
 import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import HotelDetails from "./pages/HotelDetails";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

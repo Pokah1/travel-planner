@@ -53,7 +53,7 @@ const Navigation = () => {
             >
               <Plane className="h-8 w-8 text-[#03547c]" />
               <span className="text-xl font-bold text-[#03547c]">
-                Wanderlust
+                Trivana
               </span>
             </Link>
 
