@@ -60,7 +60,7 @@ const Login = () => {
           <div className="flex items-center justify-center space-x-2 mb-2">
             <Plane className="h-8 w-8" style={{ color: "#004466" }} />
             <span className="text-2xl font-bold" style={{ color: "#004466" }}>
-              Wanderlust
+              Trivana
             </span>
           </div>
           <h1 className="text-2xl font-semibold">Welcome Back</h1>

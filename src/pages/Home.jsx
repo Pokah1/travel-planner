@@ -106,7 +106,7 @@ const HomePage = () => {
 <section className="py-20 px-4">
   <div className="container mx-auto">
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold mb-4">Why Choose Wanderlust?</h2>
+      <h2 className="text-4xl font-bold mb-4">Why Choose Trivana?</h2>
       <p className="text-xl text-[#667085] max-w-2xl mx-auto">
         We make travel planning simple, personal, and unforgettable
       </p>

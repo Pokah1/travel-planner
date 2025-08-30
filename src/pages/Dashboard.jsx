@@ -4,31 +4,36 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { MapPin, Calendar, Heart, TrendingUp, Globe } from "lucide-react";
 
+// Images
+import templeImage from "../assets/japanese-temple.jpg";
+import parisImage from "../assets/europeancity.jpg";
+import baliImage from "../assets/bali.jpg";
+
 const Dashboard = () => {
   const [displayName, setDisplayName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
 
   const stats = [
     {
-      label: "Trips Planned",
+      label: "Planned Trips",
       value: "12",
       icon: MapPin,
       color: "text-blue-600",
     },
     {
-      label: "Countries Visited",
+      label: "Visited Nations",
       value: "8",
       icon: Globe,
       color: "text-green-600",
     },
     {
-      label: "Saved Destinations",
+      label: "Bookmarks",
       value: "24",
       icon: Heart,
       color: "text-red-600",
     },
     {
-      label: "Days Traveled",
+      label: "Travel Days",
       value: "156",
       icon: Calendar,
       color: "text-purple-600",
@@ -40,28 +45,26 @@ const Dashboard = () => {
       destination: "Tokyo, Japan",
       date: "Dec 2024",
       status: "Completed",
-      image: "/src/assets/japanese-temple.jpg",
+      image: templeImage,
     },
     {
       destination: "Paris, France",
       date: "Jan 2025",
       status: "Upcoming",
-      image: "/src/assets/europeancity.jpg",
+      image: parisImage,
     },
     {
       destination: "Bali, Indonesia",
       date: "Mar 2025",
       status: "Planning",
-      image: "/src/assets/mountain-lake.jpg",
+      image: baliImage,
     },
   ];
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-
-// Set Google photoURL if exists
-      setProfileImage(user.photoURL || null);
+        setProfileImage(user.photoURL || null);
 
         try {
           const userRef = doc(db, "users", user.uid);
@@ -73,11 +76,11 @@ const Dashboard = () => {
               firstName && lastName ? `${firstName} ${lastName}` : email
             );
           } else {
-            setDisplayName(user.email);
+            setDisplayName(user.email || "");
           }
         } catch (err) {
           console.error("Error fetching user profile:", err);
-          setDisplayName(user.email);
+          setDisplayName(user.email || "");
         }
       }
     });
@@ -87,36 +90,36 @@ const Dashboard = () => {
 
   return (
     <main className="container mx-auto px-4 py-8 bg-gray-50 min-h-screen">
-
-      {/* Welcome */}
+      {/* Greeting */}
       <header className="mb-8 flex items-center space-x-4">
-  {profileImage && (
-    <img
-      src={profileImage}
-      alt={displayName}
-      className="w-15 h-15 rounded-full object-cover border-2 border-[#03547c]"
-    />
-  )}
-  <div>
-    <h1 className="text-3xl font-bold text-gray-800 mb-2">
-      Welcome, {displayName || "Guest"}!
-    </h1>
-    <p className="text-gray-600">Ready for your next adventure?</p>
-  </div>
-</header>
-
-
+        {profileImage && (
+          <img
+            src={profileImage}
+            alt={displayName}
+            className="w-15 h-15 rounded-full object-cover border-2 border-[#03547c]"
+          />
+        )}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Hi, {displayName || "Traveler"}!
+          </h1>
+          <p className="text-gray-600">Let’s get you moving on your journeys.</p>
+        </div>
+      </header>
 
       {/* Stats */}
-      <section aria-labelledby="travel-stats" className="mb-8">
-        <h2 id="travel-stats" className="sr-only">
-          Travel Statistics
+      <section aria-labelledby="overview-stats" className="mb-8">
+        <h2 id="overview-stats" className="sr-only">
+          Overview Stats
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <article key={index} className="bg-gray-100 shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <article
+                key={index}
+                className="bg-gray-100 shadow-md rounded-xl p-6 hover:shadow-lg transition-shadow"
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm text-gray-500">{stat.label}</p>
@@ -131,12 +134,12 @@ const Dashboard = () => {
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Recent Trips */}
+        {/* Trip Log */}
         <article className="bg-white shadow rounded-lg">
           <header className="border-b p-4">
-            <h2 className="text-lg font-semibold">Recent Trips</h2>
+            <h2 className="text-lg font-semibold">Latest Trips</h2>
             <p className="text-sm text-gray-500">
-              Your latest travel adventures
+              A glance at your most recent travel notes
             </p>
           </header>
           <div className="p-4 space-y-4">
@@ -168,53 +171,52 @@ const Dashboard = () => {
               </div>
             ))}
             <button className="w-full mt-4 px-4 py-2 bg-[#03547c] text-white rounded-lg hover:bg-[#03549d] transition-colors">
-  View All Trips
-</button>
-
+              Show All Journeys
+            </button>
           </div>
         </article>
 
-        {/* Quick Actions */}
+        {/* Quick Menu */}
         <aside className="bg-white shadow rounded-lg">
           <header className="border-b p-4">
-            <h2 className="text-lg font-semibold">Quick Actions</h2>
+            <h2 className="text-lg font-semibold">Quick Menu</h2>
             <p className="text-sm text-gray-500">
-              What would you like to do today?
+              Choose an action to get started
             </p>
           </header>
           <nav className="p-4 space-y-4">
             <button className="w-full flex items-center px-4 py-2 border rounded-lg hover:bg-gray-50">
               <MapPin className="mr-2 h-4 w-4" />
-              Plan New Trip
+              Start a New Plan
             </button>
             <button className="w-full flex items-center px-4 py-2 border rounded-lg hover:bg-gray-50">
               <Globe className="mr-2 h-4 w-4" />
-              Explore Destinations
+              Discover Places
             </button>
             <button className="w-full flex items-center px-4 py-2 border rounded-lg hover:bg-gray-50">
               <Heart className="mr-2 h-4 w-4" />
-              View Saved Places
+              My Favorites
             </button>
             <button className="w-full flex items-center px-4 py-2 border rounded-lg hover:bg-gray-50">
               <TrendingUp className="mr-2 h-4 w-4" />
-              Travel Analytics
+              Travel Insights
             </button>
           </nav>
         </aside>
       </section>
 
-      {/* Travel Goals */}
+      {/* Year Goals */}
       <section className="bg-white shadow rounded-lg mt-8">
         <header className="border-b border-gray-200 p-4 mb-2">
-          <h2 className="text-lg font-semibold text-gray-700">2025 Travel Goals</h2>
+          <h2 className="text-lg font-semibold text-gray-700">2025 Travel Targets</h2>
           <p className="text-sm text-gray-500">
-            Track your progress towards your travel objectives
+            Keep track of how you’re doing on your travel milestones
           </p>
         </header>
         <div className="p-6 space-y-6">
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Countries to Visit</span>
+              <span>Countries Goal</span>
               <span>5 / 10</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -226,7 +228,7 @@ const Dashboard = () => {
           </div>
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Adventure Activities</span>
+              <span>Adventure List</span>
               <span>3 / 8</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -238,7 +240,7 @@ const Dashboard = () => {
           </div>
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Cultural Experiences</span>
+              <span>Cultural Moments</span>
               <span>7 / 12</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">

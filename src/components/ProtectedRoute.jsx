@@ -1,21 +1,11 @@
 // src/components/ProtectedRoute.jsx
 import { Navigate, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { useAuth } from "../context/useAuth"; // Import the useAuth hook
 
 const ProtectedRoute = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
-
+  // If the authentication state is still loading, show a loading indicator.
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -27,9 +17,13 @@ const ProtectedRoute = () => {
     );
   }
 
-  if (!user) return <Navigate to="/login" replace />;
+  // If there is no authenticated user, redirect to the login page.
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
-  return <Outlet />; // renders all nested routes
+  // If the user is authenticated, render the child routes.
+  return <Outlet />;
 };
 
 export default ProtectedRoute;
