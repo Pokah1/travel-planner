@@ -15,20 +15,34 @@ const MyItineraries = () => {
   const { user, loading: authLoading } = useAuth();
   const [itineraries, setItineraries] = useState([]);
   const navigate = useNavigate();
+  const [totalDays, setTotalDays] = useState(0);
 
   // Fetch trips
   useEffect(() => {
-    if (!user) return;
-    const fetchTrips = async () => {
-      try {
-        const trips = await getUserTrips(user.uid);
-        setItineraries(trips);
-      } catch (err) {
-        console.error("Failed to fetch trips:", err);
-      }
-    };
-    fetchTrips();
-  }, [user]);
+  if (!user) return;
+
+  const fetchTrips = async () => {
+    try {
+      const trips = await getUserTrips(user.uid);
+      setItineraries(trips);
+
+      // calculate total days
+      const days = trips.reduce((acc, trip) => {
+        const start = new Date(trip.startDate);
+        const end = new Date(trip.endDate);
+        const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+        return acc + diff;
+      }, 0);
+
+      setTotalDays(days);
+    } catch (err) {
+      console.error("Failed to fetch trips:", err);
+    }
+  };
+
+  fetchTrips();
+}, [user]);
+
 
   // Delete trip
   const handleDeleteTrip = async (tripId) => {
@@ -89,10 +103,15 @@ const MyItineraries = () => {
           {/* Content */}
           <div className="p-4">
             <h3 className="text-lg font-bold text-gray-800">{trip.tripName}</h3>
+          <h2 className="text-sm text-gray-600 flex items-center gap-1 mt-1">Total Trip Days: {totalDays}</h2>
+
             <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
               <Calendar className="w-4 h-4 text-gray-500" />
               {trip.startDate} → {trip.endDate}
             </p>
+          
+
+            
 
             {/* Actions */}
             <div className="flex gap-3 mt-4">

@@ -31,6 +31,14 @@ const TripDetail = () => {
 
   if (!trip) return <p className="text-center py-10">Loading trip...</p>;
 
+// calculate total days
+const totalDays =
+  Math.ceil(
+    (new Date(trip.endDate) - new Date(trip.startDate)) /
+      (1000 * 60 * 60 * 24)
+  ) + 1; // +1 to include start & end dates
+
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       {/* Trip Header */}
@@ -39,10 +47,14 @@ const TripDetail = () => {
         <MapPin size={18} className="text-blue-600" />
         {trip.destination}
       </p>
-      <p className="flex items-center gap-2 text-gray-500 text-sm mb-4">
-        <CalendarDays size={16} className="text-gray-500" />
-        {trip.startDate} → {trip.endDate}
-      </p>
+     
+     <p className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+  <CalendarDays size={16} className="text-gray-500" />
+  {trip.startDate} → {trip.endDate} •{" "}
+  <span className="text-blue-600 font-bold">{totalDays} Days Trip</span>
+</p>
+
+
 
       {/* Trip Image */}
       {trip.imageUrl && (
