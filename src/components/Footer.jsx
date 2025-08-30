@@ -72,11 +72,11 @@ const Footer = () => {
               </ScrollReveal>
               <ScrollReveal delay={500}>
                 <a
-                  href="twitter://user?screen_name=sirpokah"
+                  href="twitter://user?screen_name=Sir_Pokah"
                   onClick={() => {
                     // Fallback to web if app isn't installed
                     setTimeout(() => {
-                      window.open("https://twitter.com/sirpokah", "_blank");
+                      window.open("https://twitter.com/Sir_Pokah", "_blank");
                     }, 500);
                   }}
                   className="mx-auto"
