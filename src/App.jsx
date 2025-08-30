@@ -20,12 +20,13 @@ import ScrollReveal from "./components/ScrollReveal";
 function App() {
   return (
     <div className="min-h-screen flex flex-col w-full">
-      <ScrollReveal direction="down" delay={100}>
+     
         <Navigation />
-      </ScrollReveal>
+     
+     
 
       <main className="flex-1">
-        <ScrollReveal direction="up" delay={200}>
+      
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<Signup />} />
@@ -47,12 +48,12 @@ function App() {
 
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </ScrollReveal>
+       
       </main>
 
-      <ScrollReveal direction="up" delay={300}>
+      
         <Footer />
-      </ScrollReveal>
+     
     </div>
   );
 }
