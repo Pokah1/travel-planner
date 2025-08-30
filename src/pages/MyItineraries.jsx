@@ -43,7 +43,8 @@ const MyItineraries = () => {
   };
 
   if (authLoading) return <p className="text-center py-6">Loading....</p>;
-  if (!user) return <p className="text-center py-6">Please log in to see your trips.</p>;
+  if (!user)
+    return <p className="text-center py-6">Please log in to see your trips.</p>;
 
   return (
     <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">

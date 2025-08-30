@@ -31,7 +31,10 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/hotels" element={<HotelSearch />} /> */}
             <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:cityCode/:cityName" element={<DestinationDetails />} />
+            <Route
+              path="/destinations/:cityCode/:cityName"
+              element={<DestinationDetails />}
+            />
             <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/itineraries" element={<MyItineraries />} />
             <Route path="/itineraries/:tripId" element={<TripDetail />} />

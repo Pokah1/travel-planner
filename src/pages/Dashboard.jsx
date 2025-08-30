@@ -10,7 +10,7 @@ import parisImage from "../assets/europeancity.jpg";
 import baliImage from "../assets/bali.jpg";
 
 const Dashboard = () => {
-   const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
 
@@ -91,11 +91,10 @@ const Dashboard = () => {
   }, []);
 
   const formatName = (name, email) => {
-  if (name) return name; // use actual name if available
-  if (email && email.includes("@")) return email.split("@")[0]; // show just before "@"
-  return "Traveler"; // fallback
-};
-
+    if (name) return name; // use actual name if available
+    if (email && email.includes("@")) return email.split("@")[0]; // show just before "@"
+    return "Traveler"; // fallback
+  };
 
   return (
     <main className="container mx-auto px-4 py-8 bg-gray-50 min-h-screen">
@@ -110,10 +109,12 @@ const Dashboard = () => {
         )}
         <div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2 truncate max-w-[220px] sm:max-w-[300px]">
-  Hi, {formatName(displayName, user?.email)}!
-</h1>
+            Hi, {formatName(displayName, user?.email)}!
+          </h1>
 
-          <p className="text-gray-600">Let’s get you moving on your journeys.</p>
+          <p className="text-gray-600">
+            Let’s get you moving on your journeys.
+          </p>
         </div>
       </header>
 
@@ -218,7 +219,9 @@ const Dashboard = () => {
       {/* Year Goals */}
       <section className="bg-white shadow rounded-lg mt-8">
         <header className="border-b border-gray-200 p-4 mb-2">
-          <h2 className="text-lg font-semibold text-gray-700">2025 Travel Targets</h2>
+          <h2 className="text-lg font-semibold text-gray-700">
+            2025 Travel Targets
+          </h2>
           <p className="text-sm text-gray-500">
             Keep track of how you’re doing on your travel milestones
           </p>

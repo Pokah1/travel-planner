@@ -101,10 +101,8 @@ const Signup = () => {
 
         {/* Success message for signup */}
         {success && (
-  <p className="text-green-500 text-lg font-bold mb-2">
-    {success}
-  </p>
-)}
+          <p className="text-green-500 text-lg font-bold mb-2">{success}</p>
+        )}
 
         {/* Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-4 mt-6">

@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Plane , Globe, Eye, EyeOff } from "lucide-react";
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { Plane, Globe, Eye, EyeOff } from "lucide-react";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../firebase/firebase";
-import googleIcon from "../assets/googleIcon.svg"
+import googleIcon from "../assets/googleIcon.svg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,7 +52,8 @@ const Login = () => {
     <main
       className="min-h-screen flex items-center justify-center p-4"
       style={{
-        background: "linear-gradient(135deg, rgba(0,68,102,0.05), rgba(26,194,123,0.05))",
+        background:
+          "linear-gradient(135deg, rgba(0,68,102,0.05), rgba(26,194,123,0.05))",
       }}
     >
       <section
@@ -92,32 +97,31 @@ const Login = () => {
               }}
             />
           </div>
-<div className="space-y-2 relative">
-  <label htmlFor="password" className="block text-sm font-medium">
-    Password
-  </label>
-  <input
-    id="password"
-    type={showPassword ? "text" : "password"}
-    placeholder="Enter your password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    required
-    className="w-full border rounded-md px-3 py-2 pr-10 focus:outline-none"
-    style={{
-      borderColor: "#cbd5e1",
-      boxShadow: "0 0 0 2px rgba(0,68,102,0.1)",
-    }}
-  />
-  <button
-    type="button"
-    onClick={() => setShowPassword(!showPassword)}
-    className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 mt-5"
-  >
-    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-  </button>
-</div>
-
+          <div className="space-y-2 relative">
+            <label htmlFor="password" className="block text-sm font-medium">
+              Password
+            </label>
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full border rounded-md px-3 py-2 pr-10 focus:outline-none"
+              style={{
+                borderColor: "#cbd5e1",
+                boxShadow: "0 0 0 2px rgba(0,68,102,0.1)",
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 mt-5"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
 
           {/* Loading Spinner */}
           {loading && (
@@ -143,26 +147,27 @@ const Login = () => {
           <hr className="flex-grow border-gray-300" />
         </div>
 
+        {/* Google Sign-In Button */}
 
-{/* Google Sign-In Button */}
-
-<button
-  onClick={handleGoogleSignIn}
-  disabled={loading}
-  className={`w-full py-2 rounded-md flex items-center justify-center space-x-2 text-white ${
-    loading ? "opacity-50 cursor-not-allowed" : ""
-  }`}
-  style={{ backgroundColor: "#DB4347" }}
->
-  <img src={googleIcon} alt="Google" width={20} height={20} />
-  <span>{loading ? "Signing In..." : "Sign in with Google"}</span>
-</button>
-
+        <button
+          onClick={handleGoogleSignIn}
+          disabled={loading}
+          className={`w-full py-2 rounded-md flex items-center justify-center space-x-2 text-white ${
+            loading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          style={{ backgroundColor: "#DB4347" }}
+        >
+          <img src={googleIcon} alt="Google" width={20} height={20} />
+          <span>{loading ? "Signing In..." : "Sign in with Google"}</span>
+        </button>
 
         {/* Footer */}
         <p className="mt-6 text-center text-sm">
           <span style={{ color: "#6b7280" }}>Don't have an account? </span>
-          <Link to="/signup" style={{ color: "#004466", textDecoration: "underline" }}>
+          <Link
+            to="/signup"
+            style={{ color: "#004466", textDecoration: "underline" }}
+          >
             Sign up
           </Link>
         </p>

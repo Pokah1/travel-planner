@@ -1,14 +1,28 @@
-import { MapPin, Star } from "lucide-react"
+import { MapPin, Star } from "lucide-react";
 
-const DestinationCard = ({ name, country, image, rating, price, tags, onClick, description, disabled = false }) => {
+const DestinationCard = ({
+  name,
+  country,
+  image,
+  rating,
+  price,
+  tags,
+  onClick,
+  description,
+  disabled = false,
+}) => {
   return (
     <div
       className={`group overflow-hidden rounded-lg bg-white transition-all duration-300 
-        ${disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer hover:-translate-y-1"}`}
+        ${
+          disabled
+            ? "opacity-60 cursor-not-allowed"
+            : "cursor-pointer hover:-translate-y-1"
+        }`}
       style={{
         boxShadow: "0 4px 20px -4px #014b661A",
       }}
-      onClick={!disabled ? onClick : undefined}  
+      onClick={!disabled ? onClick : undefined}
     >
       {/* Image section */}
       <div className="relative h-48 overflow-hidden">
@@ -35,9 +49,7 @@ const DestinationCard = ({ name, country, image, rating, price, tags, onClick, d
           {name}
         </h3>
         {/* ✅ Add description here */}
-        <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-          {description}
-        </p>
+        <p className="text-sm text-gray-600 mb-2 line-clamp-2">{description}</p>
 
         <div className="flex items-center space-x-1 mb-3">
           <Star className="h-4 w-4 fill-secondary text-secondary" />
@@ -47,14 +59,17 @@ const DestinationCard = ({ name, country, image, rating, price, tags, onClick, d
 
         <div className="flex flex-wrap gap-1">
           {(tags || []).slice(0, 3).map((tag) => (
-            <span key={tag} className="inline-block border border-gray-300 rounded px-2 py-0.5 text-xs">
+            <span
+              key={tag}
+              className="inline-block border border-gray-300 rounded px-2 py-0.5 text-xs"
+            >
               {tag}
             </span>
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DestinationCard
+export default DestinationCard;

@@ -1,8 +1,8 @@
 // src/context/AuthProvider.jsx
-import { useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
-import { AuthContext } from './AuthContext'; // Import the context object
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { AuthContext } from "./AuthContext"; // Import the context object
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

@@ -17,9 +17,6 @@ import maldivesImage from "../assets/maldives.jpg";
 import qatarImage from "../assets/qatar.jpg";
 import singaporeImage from "../assets/singapore.jpg";
 
-
-
-
 const Destinations = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
@@ -218,14 +215,16 @@ const Destinations = () => {
                           </span>
                         </div>
                         {/* Price Fix */}
-    {hotel.price && (
-      <div className="flex justify-between items-center">
-        <span className="text-lg font-bold text-[#03547c]">
-          {hotel.price} 
-        </span>
-        <span className="text-sm text-gray-500">per night</span>
-      </div>
-    )}
+                        {hotel.price && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-lg font-bold text-[#03547c]">
+                              {hotel.price}
+                            </span>
+                            <span className="text-sm text-gray-500">
+                              per night
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
