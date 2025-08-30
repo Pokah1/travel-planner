@@ -72,9 +72,13 @@ const Footer = () => {
               </ScrollReveal>
               <ScrollReveal delay={500}>
                 <a
-                  href="https://twitter.com/sirpokah"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="twitter://user?screen_name=sirpokah"
+                  onClick={() => {
+                    // Fallback to web if app isn't installed
+                    setTimeout(() => {
+                      window.open("https://twitter.com/sirpokah", "_blank");
+                    }, 500);
+                  }}
                   className="mx-auto"
                 >
                   <Twitter className="h-5 w-5 cursor-pointer hover:text-sky-300 transition-transform transform hover:scale-110" />
