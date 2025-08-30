@@ -5,6 +5,7 @@ import DestinationCard from "../components/DestinationCard";
 import mountainImage from "../assets/mountain-lake.jpg";
 import cityImage from "../assets/europeancity.jpg";
 import templeImage from "../assets/japanese-temple.jpg";
+import ScrollReveal from "../components/ScrollReveal";
 
 const HomePage = () => {
   const destinationSamples = [
@@ -68,43 +69,40 @@ const HomePage = () => {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Your Next
-            <span className="block bg-[linear-gradient(135deg,#004466,#1ac27b)] bg-clip-text text-transparent">
-              Adventure Awaits
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in">
-            Discover amazing destinations and create unforgettable memories
-          </p>
+          <ScrollReveal direction="up">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              Your Next
+              <span className="block bg-[linear-gradient(135deg,#004466,#1ac27b)] bg-clip-text text-transparent">
+                Adventure Awaits
+              </span>
+            </h1>
+          </ScrollReveal>
 
-          <div className="flex flex-col md:flex-row gap-4 max-w-2xl  mx-auto mb-8 animate-slide-up">
-            <div className="flex-1 relative max-w-xl">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
-              <input
-                placeholder="Where do you want to go?"
-                className="pl-8 w-full h-12 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/70 rounded-md"
-              />
+          <ScrollReveal direction="up" delay={200}>
+            <p className="text-xl md:text-2xl mb-8 opacity-90">
+              Discover amazing destinations and create unforgettable memories
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={400}>
+            <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto mb-8">
+              <div className="flex-1 relative max-w-xl">
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                <input
+                  placeholder="Where do you want to go?"
+                  className="pl-8 w-full h-12 bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder:text-white/70 rounded-md"
+                />
+              </div>
+
+              <button className="h-12 px-8 bg-[#F79C4B] hover:bg-[#F87665] rounded-md">
+                Search Destinations
+              </button>
             </div>
-
-            <button className="h-12 px-8 bg-[#F79C4B] hover:bg-[#F87665] rounded-md">
-              Search Destinations
-            </button>
-          </div>
-          <Link to="/destinations">
-            <button
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium
-         border border-input bg-transparent hover:bg-accent hover:text-accent-foreground
-         h-11 px-8 border-white/30 text-white hover:bg-white/10 transition-colors focus-visible:outline-none
-         focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              Explore All Destinations
-            </button>
-          </Link>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Features Sections  */}
+      {/* Features Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -118,20 +116,19 @@ const HomePage = () => {
             {destinationFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div
-                  key={index}
-                  className="text-center p-6 [box-shadow:0_4px_20px_-4px_#005c731A] hover:[box-shadow:0_8px_30px_-4px_#005c7333] transition-all duration-300 rounded-lg bg-white"
-                >
-                  <div className="pt-6">
-                    <div className="w-16 h-16 bg-[#F79C4B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon className="h-8 w-8 text-[#F79C4B]" />
+                <ScrollReveal key={index} direction="up" delay={index * 200}>
+                  <div className="text-center p-6 [box-shadow:0_4px_20px_-4px_#005c731A] hover:[box-shadow:0_8px_30px_-4px_#005c7333] transition-all duration-300 rounded-lg bg-white">
+                    <div className="pt-6">
+                      <div className="w-16 h-16 bg-[#F79C4B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Icon className="h-8 w-8 text-[#F79C4B]" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3">
+                        {feature.title}
+                      </h3>
+                      <p className="text-[#667085]">{feature.description}</p>
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-[#667085]">{feature.description}</p>
                   </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -154,29 +151,15 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {destinationSamples.map((destination) => (
-              <DestinationCard key={destination.id} {...destination} />
+            {destinationSamples.map((destination, index) => (
+              <ScrollReveal
+                key={destination.id}
+                direction="up"
+                delay={index * 200}
+              >
+                <DestinationCard {...destination} />
+              </ScrollReveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-[linear-gradient(135deg,#004466,#1ac27b)] text-white">
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Start Planning?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Join thousands of travelers who have discovered their perfect trip
-          </p>
-          <div className="space-x-4">
-            <Link to="/planner">
-              <button>Start Planning</button>
-            </Link>
-            <Link to="/destinations">
-              <button className="border-white/30 text-white hover:bg-white/10">
-                Browse Destinations
-              </button>
-            </Link>
           </div>
         </div>
       </section>

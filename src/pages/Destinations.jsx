@@ -16,6 +16,7 @@ import dubaiImage from "../assets/dubai.jpg";
 import maldivesImage from "../assets/maldives.jpg";
 import qatarImage from "../assets/qatar.jpg";
 import singaporeImage from "../assets/singapore.jpg";
+import ScrollReveal from "../components/ScrollReveal";
 
 const Destinations = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -258,29 +259,31 @@ const Destinations = () => {
                     destination.address?.cityName || destination.name;
 
                   return (
-                    <DestinationCard
-                      key={destinationId}
-                      name={destination.name}
-                      country={
-                        destination.address?.countryName ||
-                        destination.country ||
-                        "Unknown"
-                      }
-                      description={destination.description}
-                      image={destination.image || "/assets/europeancity.jpg"}
-                      rating={destination.rating || 4.5}
-                      price={destination.price || "From $200"}
-                      tags={destination.tags || ["Popular"]}
-                      disabled={false}
-                      onClick={() =>
-                        navigate(
-                          `/destinations/${destinationId}/${encodeURIComponent(
-                            cityName
-                          )}`,
-                          { state: { lat, lon, cityName } }
-                        )
-                      }
-                    />
+                    <ScrollReveal>
+                      <DestinationCard
+                        key={destinationId}
+                        name={destination.name}
+                        country={
+                          destination.address?.countryName ||
+                          destination.country ||
+                          "Unknown"
+                        }
+                        description={destination.description}
+                        image={destination.image || "/assets/europeancity.jpg"}
+                        rating={destination.rating || 4.5}
+                        price={destination.price || "From $200"}
+                        tags={destination.tags || ["Popular"]}
+                        disabled={false}
+                        onClick={() =>
+                          navigate(
+                            `/destinations/${destinationId}/${encodeURIComponent(
+                              cityName
+                            )}`,
+                            { state: { lat, lon, cityName } }
+                          )
+                        }
+                      />
+                    </ScrollReveal>
                   );
                 })}
               </div>

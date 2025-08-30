@@ -15,37 +15,44 @@ import Signup from "./pages/Signup";
 import HotelDetails from "./pages/HotelDetails";
 import Footer from "./components/Footer";
 import TripDetail from "./pages/TripDetail";
+import ScrollReveal from "./components/ScrollReveal";
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col w-full">
-      <Navigation />
+      <ScrollReveal direction="down" delay={100}>
+        <Navigation />
+      </ScrollReveal>
+
       <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+        <ScrollReveal direction="up" delay={200}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
 
-          {/* Wrap all protected pages once */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/hotels" element={<HotelSearch />} /> */}
-            <Route path="/destinations" element={<Destinations />} />
-            <Route
-              path="/destinations/:cityCode/:cityName"
-              element={<DestinationDetails />}
-            />
-            <Route path="/hotels/:id" element={<HotelDetails />} />
-            <Route path="/itineraries" element={<MyItineraries />} />
-            <Route path="/itineraries/:tripId" element={<TripDetail />} />
-            <Route path="/planner" element={<TravelPlanner />} />
-            <Route path="/planner/:tripId" element={<TravelPlanner />} />
-          </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route
+                path="/destinations/:cityCode/:cityName"
+                element={<DestinationDetails />}
+              />
+              <Route path="/hotels/:id" element={<HotelDetails />} />
+              <Route path="/itineraries" element={<MyItineraries />} />
+              <Route path="/itineraries/:tripId" element={<TripDetail />} />
+              <Route path="/planner" element={<TravelPlanner />} />
+              <Route path="/planner/:tripId" element={<TravelPlanner />} />
+            </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ScrollReveal>
       </main>
-      <Footer />
+
+      <ScrollReveal direction="up" delay={300}>
+        <Footer />
+      </ScrollReveal>
     </div>
   );
 }
