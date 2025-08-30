@@ -94,9 +94,11 @@ const HomePage = () => {
                 />
               </div>
 
-              <button className="h-12 px-8 bg-[#F79C4B] hover:bg-[#F87665] rounded-md">
-                Search Destinations
-              </button>
+              <Link to="/destinations">
+                <button className="h-12 px-8 bg-[#F79C4B] hover:bg-[#F87665] rounded-md">
+                  Search Destinations
+                </button>
+              </Link>
             </div>
           </ScrollReveal>
         </div>
@@ -115,6 +117,7 @@ const HomePage = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {destinationFeatures.map((feature, index) => {
               const Icon = feature.icon;
+
               return (
                 <ScrollReveal key={index} direction="up" delay={index * 200}>
                   <div className="text-center p-6 [box-shadow:0_4px_20px_-4px_#005c731A] hover:[box-shadow:0_8px_30px_-4px_#005c7333] transition-all duration-300 rounded-lg bg-white">
