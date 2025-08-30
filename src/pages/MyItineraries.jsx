@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import { useAuth } from "../context/useAuth"; // import auth
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
+import { getUserTrips, deleteTrip } from "../utils/saveTrip";
+
+import { Eye, Pencil, Trash2, Calendar } from "lucide-react"; // ✅ lucide icons
+
 import cityImage from "../assets/europeancity.jpg";
 import mountainImage from "../assets/mountain-lake.jpg";
 import templeImage from "../assets/japanese-temple.jpg";
@@ -9,40 +12,87 @@ import templeImage from "../assets/japanese-temple.jpg";
 const fallbackImages = [cityImage, mountainImage, templeImage];
 
 const MyItineraries = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [itineraries, setItineraries] = useState([]);
+  const navigate = useNavigate();
 
+  // Fetch trips
   useEffect(() => {
-    if (!user) return; // wait for user to be available
-
+    if (!user) return;
     const fetchTrips = async () => {
       try {
-        const snap = await getDocs(collection(db, `users/${user.uid}/trips`));
-        const trips = snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        const trips = await getUserTrips(user.uid); // ✅ from utils
         setItineraries(trips);
       } catch (err) {
-        console.error("Error fetching trips:", err);
+        console.error("Failed to fetch trips:", err);
       }
     };
-
     fetchTrips();
   }, [user]);
 
+  // Delete trip
+  const handleDeleteTrip = async (tripId) => {
+    if (!user) return;
+    if (!window.confirm("Are you sure you want to delete this trip?")) return;
+    try {
+      await deleteTrip(user.uid, tripId); // ✅ from utils
+      setItineraries(itineraries.filter((t) => t.id !== tripId));
+    } catch (err) {
+      console.error("Failed to delete trip:", err);
+    }
+  };
+
+  if (authLoading) return <p className="text-center py-6">Loading....</p>;
+  if (!user) return <p className="text-center py-6">Please log in to see your trips.</p>;
+
   return (
-    <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {itineraries.map((trip, idx) => (
-        <div key={trip.id} className="bg-white rounded-lg shadow overflow-hidden">
-          <img
-            src={trip.imageUrl || fallbackImages[idx % fallbackImages.length]}
-            alt={trip.destination}
-            className="h-48 w-full object-cover"
-          />
+        <div
+          key={trip.id}
+          className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
+        >
+          {/* Image */}
+          <div className="relative">
+            <img
+              src={trip.imageUrl || fallbackImages[idx % fallbackImages.length]}
+              alt={trip.destination}
+              className="h-48 w-full object-cover"
+            />
+            <span className="absolute top-2 left-2 bg-white/80 px-3 py-1 rounded-full text-sm text-gray-800 font-medium">
+              {trip.destination}
+            </span>
+          </div>
+
+          {/* Content */}
           <div className="p-4">
-            <h3 className="text-lg font-bold">{trip.tripName}</h3>
-            <p className="text-gray-600">{trip.destination}</p>
-            <p className="text-gray-500 text-xs">
-              {trip.startDate} - {trip.endDate}
+            <h3 className="text-lg font-bold text-gray-800">{trip.tripName}</h3>
+            <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+              <Calendar className="w-4 h-4 text-gray-500" />
+              {trip.startDate} → {trip.endDate}
             </p>
+
+            {/* Actions */}
+            <div className="flex gap-3 mt-4">
+              <button
+                onClick={() => navigate(`/itineraries/${trip.id}`)}
+                className="flex items-center gap-1 px-3 py-1 bg-[#03547c] text-white rounded-lg text-sm shadow hover:bg-[#024061]"
+              >
+                <Eye size={16} /> View
+              </button>
+              <button
+                onClick={() => navigate(`/planner/${trip.id}`)}
+                className="flex items-center gap-1 px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm shadow hover:bg-yellow-600"
+              >
+                <Pencil size={16} /> Edit
+              </button>
+              <button
+                onClick={() => handleDeleteTrip(trip.id)}
+                className="flex items-center gap-1 px-3 py-1 bg-red-600 text-white rounded-lg text-sm shadow hover:bg-red-700"
+              >
+                <Trash2 size={16} /> Delete
+              </button>
+            </div>
           </div>
         </div>
       ))}

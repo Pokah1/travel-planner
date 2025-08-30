@@ -12,8 +12,9 @@ Trivana helps users **explore destinations, check weather, search hotels, create
 - 📊 **Dashboard** — Personalized home after login.  
 - 🗺 **Destinations** — Browse and filter destinations.  
 - 🏨 **Hotels Search** — Find hotels for chosen destinations.  
-- 📅 **My Itineraries** — View, edit, share, and delete saved trips.  
-- ✈️ **Travel Planner** — Plan and save new trips.  
+- 📅 **My Itineraries** — View all saved trips with edit, share, and delete options.
+- ✈️ **Travel Planner** — Create new trips, add activities day-by-day, and save itineraries.
+- 📖  **Trip Detail Page** — View full details of a specific trip including itinerary, activities, and images.
 - 🚫 **404 Not Found Page** — Friendly error screen for invalid routes.  
 
 ---
@@ -56,8 +57,9 @@ src/
 ┃ ┣ Signup.jsx
 ┃ ┣ Dashboard.jsx
 ┃ ┣ Destinations.jsx
-┃ ┣ Planner.jsx
-┃ ┣ MyItineraries.jsx
+┃ ┣ Planner.jsx ← (create & update trips + add activities)
+┃ ┣ MyItineraries.jsx ← (list all trips with edit/delete options)
+┃ ┣ TripDetail.jsx ← (view single trip with itinerary details)
 ┃ ┗ NotFound.jsx
 ┣ App.jsx
 ┗ main.jsx

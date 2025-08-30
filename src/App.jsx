@@ -5,6 +5,7 @@ import HomePage from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 // import HotelSearch from "./pages/HotelSearch";
+
 import Destinations from "./pages/Destinations";
 import DestinationDetails from "./pages/DestinationDetails";
 import MyItineraries from "./pages/MyItineraries";
@@ -13,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import Signup from "./pages/Signup";
 import HotelDetails from "./pages/HotelDetails";
 import Footer from "./components/Footer";
+import TripDetail from "./pages/TripDetail";
 
 function App() {
   return (
@@ -32,7 +34,9 @@ function App() {
             <Route path="/destinations/:cityCode/:cityName" element={<DestinationDetails />} />
             <Route path="/hotels/:id" element={<HotelDetails />} />
             <Route path="/itineraries" element={<MyItineraries />} />
+            <Route path="/itineraries/:tripId" element={<TripDetail />} />
             <Route path="/planner" element={<TravelPlanner />} />
+            <Route path="/planner/:tripId" element={<TravelPlanner />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

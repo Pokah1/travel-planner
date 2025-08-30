@@ -10,6 +10,7 @@ import parisImage from "../assets/europeancity.jpg";
 import baliImage from "../assets/bali.jpg";
 
 const Dashboard = () => {
+   const [user, setUser] = useState(null);
   const [displayName, setDisplayName] = useState("");
   const [profileImage, setProfileImage] = useState(null);
 
@@ -62,12 +63,13 @@ const Dashboard = () => {
   ];
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setProfileImage(user.photoURL || null);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser); //  save full user
+        setProfileImage(currentUser.photoURL || null);
 
         try {
-          const userRef = doc(db, "users", user.uid);
+          const userRef = doc(db, "users", currentUser.uid);
           const userSnap = await getDoc(userRef);
 
           if (userSnap.exists()) {
@@ -76,17 +78,24 @@ const Dashboard = () => {
               firstName && lastName ? `${firstName} ${lastName}` : email
             );
           } else {
-            setDisplayName(user.email || "");
+            setDisplayName(currentUser.email || "");
           }
         } catch (err) {
           console.error("Error fetching user profile:", err);
-          setDisplayName(user.email || "");
+          setDisplayName(currentUser.email || "");
         }
       }
     });
 
     return () => unsubscribe();
   }, []);
+
+  const formatName = (name, email) => {
+  if (name) return name; // use actual name if available
+  if (email && email.includes("@")) return email.split("@")[0]; // show just before "@"
+  return "Traveler"; // fallback
+};
+
 
   return (
     <main className="container mx-auto px-4 py-8 bg-gray-50 min-h-screen">
@@ -100,9 +109,10 @@ const Dashboard = () => {
           />
         )}
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Hi, {displayName || "Traveler"}!
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 truncate max-w-[220px] sm:max-w-[300px]">
+  Hi, {formatName(displayName, user?.email)}!
+</h1>
+
           <p className="text-gray-600">Let’s get you moving on your journeys.</p>
         </div>
       </header>
